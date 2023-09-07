@@ -12,6 +12,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+
 // Your code
 if (process.env.NODE_ENV === "production") {
   const path = require("path");
@@ -26,6 +28,7 @@ if (process.env.NODE_ENV === "production") {
 }
 // Your code
 
+const PORT = process.env.PORT || 5000; 
 
 app.use("/api/v1/post", postRoutes);
 app.use("/api/v1/dalle", dalleRoutes);
@@ -34,7 +37,7 @@ app.use("/api/v1/dalle", dalleRoutes);
 const startServer = async () => {
   try {
     connectDB(process.env.MONGODB_URI);
-    app.listen(8080, () => console.log("Server is up on the port 8080"));
+    app.listen(PORT, () => console.log(`Server is up on the port ${PORT}`));
   } catch (error) {
     console.log(error);
   }
